@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode(exclude = {"date"})
 @Table(name = "CovidData")
+@ToString
 public class CovidData {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

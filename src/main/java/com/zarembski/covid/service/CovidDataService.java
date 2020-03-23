@@ -20,4 +20,8 @@ public class CovidDataService {
             covidDataRepository.save(covidData);
         }
     }
+
+    public CovidData getLastData() {
+        return covidDataRepository.findFirstByOrderByDateDesc();
+    }
 }

@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	symlinks = false
+	ignorecase = true
+[remote "pi"]
+	url = pi@192.168.1.10:sieciowy/git/korona.git
+	fetch = +refs/heads/*:refs/remotes/pi/*

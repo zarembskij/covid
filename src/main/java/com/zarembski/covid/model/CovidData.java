@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-@EqualsAndHashCode(exclude = {"date"})
+@EqualsAndHashCode(exclude = {"date", "id"})
 @Table(name = "CovidData")
 @ToString
 public class CovidData {

@@ -40,6 +40,6 @@ public class CovidDataService {
     private String getSecondLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
         return builder.append("zm/wy: ").append(data.getDeaths()).append("(").append(data.getTodayDeaths())
-                .append(")").append(" / ").append(data.getRecovered()).toString();
+                .append(")").append("/").append(data.getRecovered()).toString();
     }
 }

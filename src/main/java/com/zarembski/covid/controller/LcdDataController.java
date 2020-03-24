@@ -2,7 +2,7 @@ package com.zarembski.covid.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zarembski.covid.model.CovidData;
+import com.zarembski.covid.model.LcdCovidData;
 import com.zarembski.covid.service.CovidDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class DataController {
+public class LcdDataController {
 
     private final CovidDataService covidDataService;
 
-    @RequestMapping("/covid/poland")
+    @RequestMapping("/covid/poland/lcd")
     public String getLastRecord() {
-
-        CovidData lastData = covidDataService.getLastData();
+        LcdCovidData lastData = covidDataService.getLcdLastDate();
 
         ObjectMapper mapper = new ObjectMapper();
         try {

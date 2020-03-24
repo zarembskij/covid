@@ -21,8 +21,9 @@ public class ApiRequest {
     private Client client = ClientBuilder.newClient();
     private final CovidDataService covidDataService;
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 300000)
     private void getData() {
+        log.info(String.format("Getting data from url: %s", REST_URI));
         Resullt result =  client
                 .target(REST_URI)
                 .request()

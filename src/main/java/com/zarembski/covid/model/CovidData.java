@@ -16,11 +16,18 @@ import java.time.LocalDateTime;
 public class CovidData {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    private Long cases;
-    private Long todayCases;
-    private Long deaths;
-    private Long todayDeaths;
-    private Long recovered;
+    private long id;
+    private long cases;
+    private long todayCases;
+    private long deaths;
+    private long todayDeaths;
+    private long recovered;
     private LocalDateTime date;
+
+    public boolean isNeedToUpdate(CovidData newData) {
+        return (newData.cases > this.cases ||
+                newData.todayCases > this.todayCases ||
+                newData.deaths > this.deaths ||
+                newData.todayDeaths > this.todayDeaths);
+    }
 }

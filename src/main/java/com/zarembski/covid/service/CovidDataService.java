@@ -34,12 +34,12 @@ public class CovidDataService {
 
     private String getFirstLcdLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("COV: ").append(data.getCases()).append("/").append(data.getTodayCases()).toString();
+        return builder.append("Cov ").append(data.getCases()).append("/").append(data.getTodayCases()).toString();
     }
 
     private String getSecondLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("zm/wy: ").append(data.getDeaths()).append("(").append(data.getTodayDeaths())
+        return builder.append("zm/wy ").append(data.getDeaths()).append("(").append(data.getTodayDeaths())
                 .append(")").append("/").append(data.getRecovered()).toString();
     }
 }

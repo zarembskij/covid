@@ -15,19 +15,19 @@ import java.time.LocalDateTime;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class ApiRequest {
+public class HerokuappApiRequest {
 
     private static final String REST_URI = "https://coronavirus-19-api.herokuapp.com/countries/Poland";
     private Client client = ClientBuilder.newClient();
     private final CovidDataService covidDataService;
 
-    @Scheduled(fixedRate = 300000)
+    // @Scheduled(fixedRate = 300000)
     private void getData() {
         log.info(String.format("Getting data from url: %s", REST_URI));
-        Resullt result =  client
+        LmaoResullt result =  client
                 .target(REST_URI)
                 .request()
-                .get(Resullt.class);
+                .get(LmaoResullt.class);
         covidDataService.saveCovidDataWhenNewData(result.buildCovidData());
     }
 }
@@ -35,14 +35,14 @@ public class ApiRequest {
 @Data
 class Resullt {
         private String country;
-        private Long cases;
-        private Long todayCases;
-        private Long deaths;
-        private Long todayDeaths;
-        private Long recovered;
-        private Long active;
-        private Long critical;
-        private Long casesPerOneMillion;
+        private long cases;
+        private long todayCases;
+        private long deaths;
+        private long todayDeaths;
+        private long recovered;
+        private long active;
+        private long critical;
+        private long casesPerOneMillion;
 
         public CovidData buildCovidData() {
             return CovidData.builder()

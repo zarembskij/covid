@@ -23,11 +23,4 @@ public class CovidData {
     private long todayDeaths;
     private long recovered;
     private LocalDateTime date;
-
-    public boolean isNeedToUpdate(CovidData newData) {
-        return (newData.cases > this.cases ||
-                newData.todayCases > this.todayCases ||
-                newData.deaths > this.deaths ||
-                newData.todayDeaths > this.todayDeaths);
-    }
 }

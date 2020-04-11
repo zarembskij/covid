@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -37,6 +38,7 @@ public class CovidDataService {
 
     public List<CovidData> getAllHistoricalData() {
         return Lists.newArrayList(covidDataRepository.findAll());
+        //TODO
     }
 
     private String getFirstLcdLine(CovidData data) {

@@ -1,5 +1,6 @@
 package com.zarembski.covid.service;
 
+import com.google.common.collect.Lists;
 import com.zarembski.covid.model.CovidData;
 import com.zarembski.covid.model.LcdCovidData;
 import com.zarembski.covid.repository.CovidDataRepository;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -30,6 +33,10 @@ public class CovidDataService {
         CovidData lastData = covidDataRepository.findFirstByOrderByDateDesc();
         return LcdCovidData.builder().firstLine(getFirstLcdLine(lastData))
                 .secondLine(getSecondLine(lastData)).build();
+    }
+
+    public List<CovidData> getAllHistoricalData() {
+        return Lists.newArrayList(covidDataRepository.findAll());
     }
 
     private String getFirstLcdLine(CovidData data) {

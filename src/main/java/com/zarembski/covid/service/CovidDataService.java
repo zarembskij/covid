@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -43,12 +42,12 @@ public class CovidDataService {
 
     private String getFirstLcdLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("C ").append(data.getCases()).append("/").append(data.getTodayCases()).toString();
+        return builder.append(data.getCases()).append("/").append(data.getTodayCases()).toString();
     }
 
     private String getSecondLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("Z/W ").append(data.getDeaths()).append("(").append(data.getTodayDeaths())
+        return builder.append(data.getDeaths()).append("(").append(data.getTodayDeaths())
                 .append(")").append("/").append(data.getRecovered()).toString();
     }
 }

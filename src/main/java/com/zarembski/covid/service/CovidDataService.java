@@ -1,6 +1,6 @@
 package com.zarembski.covid.service;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.*;
 import com.zarembski.covid.model.CovidData;
 import com.zarembski.covid.model.LcdCovidData;
 import com.zarembski.covid.repository.CovidDataRepository;
@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -36,8 +39,24 @@ public class CovidDataService {
     }
 
     public List<CovidData> getAllHistoricalData() {
-        return Lists.newArrayList(covidDataRepository.findAll());
-        //TODO
+        List<CovidData> covidData = Lists.newArrayList(covidDataRepository.findAll());
+        Map<LocalDate, List<CovidData>> covidDailyMap = collectDailyMap(covidData.stream().collect(Collectors.toMap(c -> c.getDate(), c -> c)));
+        return covidDailyMap.values().stream().map(l -> l.stream().max(Comparator.comparing(CovidData::getDate)).get())
+                .sorted(Comparator.comparing(CovidData::getDate)).collect(Collectors.toList());
+    }
+
+    private Map<LocalDate, List<CovidData>> collectDailyMap(Map<LocalDateTime, CovidData> covidDataMap) {
+        Map<LocalDate, List<CovidData>> covidDailyMap = Maps.newHashMap();
+
+        covidDataMap.forEach((k, v) -> {
+            if (covidDailyMap.containsKey(k.toLocalDate())) {
+                covidDailyMap.get(k.toLocalDate()).add(v);
+            } else {
+                covidDailyMap.put(k.toLocalDate(), Lists.newArrayList(v));
+            }
+        });
+
+        return covidDailyMap;
     }
 
     private String getFirstLcdLine(CovidData data) {

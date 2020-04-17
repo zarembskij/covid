@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class LmaoApiRequest {
 
-    private static final String REST_URI = "https://corona.lmao.ninja/countries/poland";
+    private static final String REST_URI = "https://corona.lmao.ninja/v2/countries/poland";
     private Client client = ClientBuilder.newClient();
     private final CovidDataService covidDataService;
 

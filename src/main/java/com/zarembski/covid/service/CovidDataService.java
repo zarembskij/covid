@@ -94,4 +94,5 @@ public class CovidDataService {
         StringBuilder builder = new StringBuilder();
         return builder.append("DeltaC:").append(deltaCases).append("/").append(" DeltaD:").append(deltaDeaths).toString();
     }
+
 }

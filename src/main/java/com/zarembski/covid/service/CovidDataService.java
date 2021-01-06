@@ -47,6 +47,14 @@ public class CovidDataService {
                 .sorted(Comparator.comparing(CovidData::getDate)).collect(Collectors.toList());
     }
 
+    private Long getYesterdayCases() {
+        List<CovidData> covidData = Lists.newArrayList(covidDataRepository.findAll());
+        Map<LocalDate, List<CovidData>> covidDailyMap = collectDailyMap(covidData.stream()
+                .filter(d ->d.getDate().toLocalDate().isBefore(LocalDate.now())).collect(Collectors.toMap(c -> c.getDate(), c -> c)));
+        return covidDailyMap.values().stream().map(l -> l.stream().max(Comparator.comparing(CovidData::getDate)).get())
+                .sorted(Comparator.comparing(CovidData::getDate)).map(c -> c.getTodayCases()).findFirst().orElse(0L);
+    }
+
     private Map<LocalDate, List<CovidData>> collectDailyMap(Map<LocalDateTime, CovidData> covidDataMap) {
         Map<LocalDate, List<CovidData>> covidDailyMap = Maps.newHashMap();
 
@@ -63,20 +71,22 @@ public class CovidDataService {
 
     private String getFirstLcdLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append(data.getCases()).append("/").append(data.getTodayCases()).toString();
+        return builder.append("C:").append(data.getCases()).append("/").append(data.getTodayCases()).toString();
     }
 
     private String getSecondLine(CovidData data) {
         StringBuilder builder = new StringBuilder();
-        return builder.append(data.getDeaths()).append("(").append(data.getTodayDeaths())
-                .append(")").append("/").append(data.getRecovered()).toString();
+        return builder.append("D:").append(data.getDeaths()).append("/").append(data.getTodayDeaths())
+                .toString();
     }
 
     private String getThirdLine(CovidData data) {
-        return "";
+        StringBuilder builder = new StringBuilder();
+        return builder.append("R:").append(data.getRecovered())
+                .toString();
     }
 
     private String getFourthLine(CovidData covidData) {
-        return "";
+        return getYesterdayCases().toString();
     }
 }

@@ -92,7 +92,7 @@ public class CovidDataService {
         Long deltaCases = covidData.getTodayCases() - yesterdayData.getTodayCases();
         Long deltaDeaths = covidData.getTodayDeaths() - yesterdayData.getTodayDeaths();
         StringBuilder builder = new StringBuilder();
-        return builder.append("DeltaC:").append(deltaCases).append("/").append(" DeltaD:").append(deltaDeaths).toString();
+        return builder.append("DC:").append(deltaCases).append("/").append(" DD:").append(deltaDeaths).toString();
     }
 
 }

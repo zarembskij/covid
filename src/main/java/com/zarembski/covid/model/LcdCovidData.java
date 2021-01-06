@@ -8,4 +8,6 @@ import lombok.Data;
 public class LcdCovidData {
     private String firstLine;
     private String secondLine;
+    private String thirdLine;
+    private String fourthLine;
 }

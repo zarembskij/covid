@@ -35,7 +35,9 @@ public class CovidDataService {
     public LcdCovidData getLcdLastDate() {
         CovidData lastData = covidDataRepository.findFirstByOrderByDateDesc();
         return LcdCovidData.builder().firstLine(getFirstLcdLine(lastData))
-                .secondLine(getSecondLine(lastData)).build();
+                .secondLine(getSecondLine(lastData))
+                .thirdLine(getThirdLine(lastData))
+                .fourthLine((getFourthLine((lastData)))).build();
     }
 
     public List<CovidData> getAllHistoricalData() {
@@ -68,5 +70,13 @@ public class CovidDataService {
         StringBuilder builder = new StringBuilder();
         return builder.append(data.getDeaths()).append("(").append(data.getTodayDeaths())
                 .append(")").append("/").append(data.getRecovered()).toString();
+    }
+
+    private String getThirdLine(CovidData data) {
+        return "";
+    }
+
+    private String getFourthLine(CovidData covidData) {
+        return "";
     }
 }

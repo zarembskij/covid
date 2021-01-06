@@ -50,7 +50,7 @@ public class CovidDataService {
     private Long getYesterdayCases() {
         List<CovidData> covidData = Lists.newArrayList(covidDataRepository.findAll());
         Map<LocalDate, List<CovidData>> covidDailyMap = collectDailyMap(covidData.stream()
-                .filter(d ->d.getDate().toLocalDate().isBefore(LocalDate.now())).collect(Collectors.toMap(c -> c.getDate(), c -> c)));
+                .filter(d ->d.getDate().toLocalDate().isEqual(LocalDate.now().minusDays(1L))).collect(Collectors.toMap(c -> c.getDate(), c -> c)));
         return covidDailyMap.values().stream().map(l -> l.stream().max(Comparator.comparing(CovidData::getDate)).get())
                 .sorted(Comparator.comparing(CovidData::getDate)).map(c -> c.getTodayCases()).findFirst().orElse(0L);
     }
